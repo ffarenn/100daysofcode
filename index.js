@@ -1,27 +1,44 @@
-// read => realise => write => reshape
+// read - realise - write - reshape
 
-// 1. Find variables
+// 1. Lets find variables -> time, PromoTime, Days, Hoursm minutes and seconds
+// 2. Find statements if greater or less than 0 whats going to happen
+// 3. Function starting Countdown
 
-// 2. Make search loops
+let time = 25; // this is time in minutes
 
-// 3. Make function
+let promoTime = time * 60; // Seconds 1500
 
-// lets get variable
-const input = document.getElementById("search");
-// lets add event listener keyup
-input.addEventListener("keyup", searchText)
+let counting = document.getElementById("countdown")
 
-// lets make a loop function
-function searchText() {
-    const inputValue = input.value; // lets assign value from list
-    const listItem = document.getElementsByTagName("li");
+// lets write the functionality
 
-      for(i = 0; i < listItem.length; i++){ // lets make list search loop 
-        // lets see if input includes typing text ion the list in lower case
-          if (listItem[i].innerHTML.toLowerCase().includes(inputValue)) {
-            listItem[i].style.display = ""; 
+function startCountdown() { // set interval will keep on calling until the specified one
+    let promoTimer = setInterval(function() {
+        if (promoTime <= 0) {
+            clearInterval(promoTime);
+            counting.innerHTML = "Countdown has ended"
         } else {
-            listItem[i].style.display = "none";
+            promoTime--;
+
+            const days = Math.floor(promoTime / 3600 / 24);
+            const hours = Math.floor(promoTime / 3600) % 24;
+            const minutes = Math.floor(promoTime / 60) % 60;
+            const seconds = Math.floor(promoTime % 60);
+            // (25*60) % 60 --> store all of this in the second variable
+            
+            counting.innerHTML = `TIME: ${addZero(hours)} hours : ${addZero(minutes)} minutes : ${addZero(seconds)} seconds`
         }
-    }
+    }, 1000) 
+
 }
+
+function addZero(t) {
+    if (t < 10) {
+        return `0${t}`
+    } else {
+        return t;
+    }
+    // return  t< 10 ? 0${t} : t;
+}
+
+startCountdown()
