@@ -1,44 +1,58 @@
-// read - realise - write - reshape
+const btn = document.querySelector(".btn");
+const error = document.querySelector(".error");
+const tip = documemt.querySelector(".tip");
+const total = document.querySelector(".total");
 
-// 1. Lets find variables -> time, PromoTime, Days, Hoursm minutes and seconds
-// 2. Find statements if greater or less than 0 whats going to happen
-// 3. Function starting Countdown
+// btn.addEventListener("click", calculateTip);
 
-let time = 25; // this is time in minutes
+// // .toString()
 
-let promoTime = time * 60; // Seconds 1500
-
-let counting = document.getElementById("countdown")
-
-// lets write the functionality
-
-function startCountdown() { // set interval will keep on calling until the specified one
-    let promoTimer = setInterval(function() {
-        if (promoTime <= 0) {
-            clearInterval(promoTime);
-            counting.innerHTML = "Countdown has ended"
-        } else {
-            promoTime--;
-
-            const days = Math.floor(promoTime / 3600 / 24);
-            const hours = Math.floor(promoTime / 3600) % 24;
-            const minutes = Math.floor(promoTime / 60) % 60;
-            const seconds = Math.floor(promoTime % 60);
-            // (25*60) % 60 --> store all of this in the second variable
-            
-            counting.innerHTML = `TIME: ${addZero(hours)} hours : ${addZero(minutes)} minutes : ${addZero(seconds)} seconds`
-        }
-    }, 1000) 
-
+// setTimeout(function, time(in ms))
+const hideError = () => {
+    setTimeout(() => {
+        error.style.display = "none"
+    }, 3000)
 }
 
-function addZero(t) {
-    if (t < 10) {
-        return `0${t}`
+// function calculateTip() {
+//     const bill = document.querySelector(".bill").value;
+//     const rate = document.querySelector(".rate").value;
+
+//     if (bill === "" || rate == "") {
+//         error.style.display = "block"
+//         hideError()
+//     } else if (isNaN(bill) == "") { // it is a function that 
+//         // checks if input is not a number ==> boolian 
+//         error.innerHTML = "Please enter a bill number!"
+//         error.style.display = "block"
+//         hideError()
+//     } else {
+//     let tipAmount = Math.round(bill * rate);
+//     tip.innnerHTML = `Tip amount: ${tipAmount}`;
+//     let totalBill = Number(bill) + tipAmount;
+//     total.innerHTML = `Total Amount: ${totalBill}`;
+//     }
+// }
+
+const calculateTip = () => {
+    const bill = document.querySelector(".bill").value;
+    const rate = document.querySelector(".rate").value;
+
+    if (bill === "" || rate == "") {
+        error.style.display = "block"
+        hideError()
+    } else if (isNaN(bill) == "") { // it is a function that 
+        // checks if input is not a number ==> boolian 
+        error.innerHTML = "Please enter a bill number!"
+        error.style.display = "block"
+        hideError()
     } else {
-        return t;
+    let tipAmount = Math.round(bill * rate);
+    tip.innnerHTML = `Tip amount: ${tipAmount}`;
+    let totalBill = Number(bill) + tipAmount;
+    total.innerHTML = `Total Amount: ${totalBill}`;
     }
-    // return  t< 10 ? 0${t} : t;
 }
 
-startCountdown()
+btn.addEventListener("click", calculateTip);
+
