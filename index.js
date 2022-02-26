@@ -1,27 +1,57 @@
-// read => realise => write => reshape
+const btn = document.querySelector(".btn");
+const error = document.querySelector(".error");
+const tip = documemt.querySelector(".tip");
+const total = document.querySelector(".total");
 
-// 1. Find variables
+// btn.addEventListener("click", calculateTip);
 
-// 2. Make search loops
+// // .toString()
 
-// 3. Make function
+// setTimeout(function, time(in ms))
+const hideError = () => {
+    setTimeout(() => {
+        error.style.display = "none"
+    }, 3000)
+}
 
-// lets get variable
-const input = document.getElementById("search");
-// lets add event listener keyup
-input.addEventListener("keyup", searchText)
+// function calculateTip() {
+//     const bill = document.querySelector(".bill").value;
+//     const rate = document.querySelector(".rate").value;
 
-// lets make a loop function
-function searchText() {
-    const inputValue = input.value; // lets assign value from list
-    const listItem = document.getElementsByTagName("li");
+//     if (bill === "" || rate == "") {
+//         error.style.display = "block"
+//         hideError()
+//     } else if (isNaN(bill) == "") { // it is a function that 
+//         // checks if input is not a number ==> boolian 
+//         error.innerHTML = "Please enter a bill number!"
+//         error.style.display = "block"
+//         hideError()
+//     } else {
+//     let tipAmount = Math.round(bill * rate);
+//     tip.innnerHTML = `Tip amount: ${tipAmount}`;
+//     let totalBill = Number(bill) + tipAmount;
+//     total.innerHTML = `Total Amount: ${totalBill}`;
+//     }
+// }
 
-      for(i = 0; i < listItem.length; i++){ // lets make list search loop 
-        // lets see if input includes typing text ion the list in lower case
-          if (listItem[i].innerHTML.toLowerCase().includes(inputValue)) {
-            listItem[i].style.display = ""; 
-        } else {
-            listItem[i].style.display = "none";
-        }
+const calculateTip = () => {
+    const bill = document.querySelector(".bill").value;
+    const rate = document.querySelector(".rate").value;
+
+    if (bill === "" || rate == "") {
+        error.style.display = "block"
+        hideError()
+    } else if (isNaN(bill) == "") { // it is a function that 
+        // checks if input is not a number ==> boolian 
+        error.innerHTML = "Please enter a bill number!"
+        error.style.display = "block"
+        hideError()
+    } else {
+    let tipAmount = Math.round(bill * rate);
+    tip.innnerHTML = `Tip amount: ${tipAmount}`;
+    let totalBill = Number(bill) + tipAmount;
+    total.innerHTML = `Total Amount: ${totalBill}`;
     }
 }
+
+btn.addEventListener("click", calculateTip);
