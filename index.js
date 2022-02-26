@@ -55,3 +55,4 @@ const calculateTip = () => {
 }
 
 btn.addEventListener("click", calculateTip);
+
